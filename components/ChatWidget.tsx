@@ -2,17 +2,18 @@ import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Loader2, Sparkles } from 'lucide-react';
 import { createChatSession, sendMessageToGemini } from '../services/geminiService';
 import { ChatMessage } from '../types';
+import { LOGO_URL } from '../constants';
 import { Chat } from "@google/genai";
 
 export const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: "Hi there! I'm Sarah from ESDR Group. How can I help you find your next home today?" }
+    { role: 'model', text: "Hi there! I'm Sarah from ESDR Living. How can I help you find your next home today?" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [chatSession, setChatSession] = useState<Chat | null>(null);
-  
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -64,9 +65,8 @@ export const ChatWidget: React.FC = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`h-14 w-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 transform hover:scale-105 ${
-            isOpen ? 'bg-slate-800 text-white rotate-90' : 'bg-emerald-600 text-white'
-          }`}
+          className={`h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-105 ${isOpen ? 'bg-brand-navy text-white rotate-90' : 'bg-brand-lime text-brand-navy'
+            }`}
         >
           {isOpen ? <X size={24} /> : <MessageCircle size={28} />}
         </button>
@@ -76,10 +76,10 @@ export const ChatWidget: React.FC = () => {
       {isOpen && (
         <div className="fixed bottom-24 right-6 w-full max-w-[360px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 flex flex-col overflow-hidden animate-fade-in-up" style={{ height: '500px', maxHeight: '80vh' }}>
           {/* Header */}
-          <div className="bg-slate-800 p-4 flex items-center justify-between">
+          <div className="bg-brand-navy p-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="h-10 w-10 rounded-full bg-emerald-100 flex items-center justify-center border-2 border-emerald-500">
-                <Sparkles size={20} className="text-emerald-600" />
+              <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center border-2 border-brand-lime overflow-hidden p-1 shadow-inner">
+                <img src={LOGO_URL} alt="ESDR" className="w-full h-full object-contain" />
               </div>
               <div>
                 <h3 className="font-bold text-white text-sm">ESDR Assistant</h3>
@@ -96,11 +96,10 @@ export const ChatWidget: React.FC = () => {
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm ${
-                    msg.role === 'user'
-                      ? 'bg-emerald-600 text-white rounded-br-none'
-                      : 'bg-white text-slate-700 shadow-sm border border-slate-200 rounded-bl-none'
-                  } ${msg.isError ? 'border-red-300 bg-red-50 text-red-600' : ''}`}
+                  className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm ${msg.role === 'user'
+                    ? 'bg-emerald-600 text-white rounded-br-none'
+                    : 'bg-white text-slate-700 shadow-sm border border-slate-200 rounded-bl-none'
+                    } ${msg.isError ? 'border-red-300 bg-red-50 text-red-600' : ''}`}
                 >
                   {msg.text}
                 </div>
@@ -118,7 +117,7 @@ export const ChatWidget: React.FC = () => {
 
           {/* Input Area */}
           <div className="p-3 bg-white border-t border-slate-100">
-            <div className="flex items-center space-x-2 bg-slate-50 rounded-full px-4 py-2 border border-slate-200 focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500 transition-all">
+            <div className="flex items-center space-x-2 bg-slate-50 rounded-full px-4 py-2 border border-slate-200 focus-within:border-brand-lime focus-within:ring-1 focus-within:ring-brand-lime transition-all">
               <input
                 type="text"
                 value={input}
@@ -131,13 +130,13 @@ export const ChatWidget: React.FC = () => {
               <button
                 onClick={handleSend}
                 disabled={!input.trim() || isLoading}
-                className="text-emerald-600 disabled:opacity-50 hover:text-emerald-700 transition-colors"
+                className="text-brand-navy disabled:opacity-50 hover:text-brand-lime transition-colors"
               >
                 <Send size={18} />
               </button>
             </div>
             <div className="text-center mt-2">
-               <span className="text-[10px] text-slate-400">Powered by Gemini AI • Always verify details</span>
+              <span className="text-[10px] text-slate-400">Powered by Gemini AI • Always verify details</span>
             </div>
           </div>
         </div>

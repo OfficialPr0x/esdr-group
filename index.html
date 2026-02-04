@@ -4,14 +4,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ESDR Group | Premier Rental Homes & Storage in Eastern Ontario</title>
+  <title>ESDR Living | Premier Rental Homes & Storage in Eastern Ontario</title>
   <meta name="description"
-    content="ESDR Group provides high-quality residential, multi-unit, and storage solutions across Cornwall, Kingston, Ottawa, and Brockville. Built on trust and family values.">
+    content="ESDR Living provides high-quality residential, multi-unit, and storage solutions across Cornwall, Kingston, Ottawa, and Brockville. Built on trust and family values.">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#3C4A68',
+              green: '#7E8D6D',
+              gray: '#4A4A4A',
+              bg: '#FDFBFC',
+              neutral: '#BDC3C2',
+              navy: '#3C4A68', // Mapping navy to the new primary blue
+              'navy-light': '#5E6D8B',
+              'navy-deep': '#1D2433',
+              lime: '#7E8D6D', // Mapping lime to the new primary green for backward compatibility
+              gold: '#C5A059', // Retaining existing gold
+              dark: '#111827', // Retaining existing dark
+              slate: '#1e293b', // Retaining existing slate
+            }
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="icon" type="image/png"
+    href="https://res.cloudinary.com/dpfapm0tl/image/upload/v1770161475/619076483_913353947862215_7683215379118947278_n-removebg-preview_uqqxru.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
   <style>
+    /* Custom animations for Premier experience */
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes spin-reverse {
+      from {
+        transform: rotate(360deg);
+      }
+
+      to {
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes progress-fast {
+      0% {
+        width: 0%;
+      }
+
+      50% {
+        width: 70%;
+      }
+
+      100% {
+        width: 100%;
+      }
+    }
+
+    .animate-fade-in {
+      animation: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-spin-reverse {
+      animation: spin-reverse 3s linear infinite;
+    }
+
+    .animate-progress-fast {
+      animation: progress-fast 3.5s ease-in-out forwards;
+    }
+
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Outfit', sans-serif;
     }
 
     /* Custom scrollbar for chat */
@@ -39,7 +118,7 @@
 
 </head>
 
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="bg-[#FDFBFC] text-[#4A4A4A] antialiased">
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

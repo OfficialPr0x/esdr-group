@@ -20,9 +20,9 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
           />
           {/* Availability Badge */}
           <div className="absolute top-4 left-4 flex gap-2">
-            <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase shadow-sm ${property.available
-                ? 'bg-emerald-500 text-white'
-                : 'bg-slate-800 text-white'
+            <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black tracking-wider uppercase shadow-sm ${property.available
+              ? 'bg-brand-lime text-brand-navy'
+              : 'bg-brand-navy text-white'
               }`}>
               {property.available ? 'Available Now' : 'Leased'}
             </span>
@@ -49,7 +49,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
         {/* Content */}
         <div className="p-5 flex flex-col flex-grow">
           <div className="flex justify-between items-start mb-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600">
+            <span className="text-[10px] font-black uppercase tracking-widest text-brand-navy/60">
               {property.category}
             </span>
             <div className="flex items-center gap-1 text-[11px] font-bold text-slate-900 bg-slate-50 px-2 py-0.5 rounded-md">
@@ -58,7 +58,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
             </div>
           </div>
 
-          <h3 className="text-lg font-bold text-slate-900 leading-tight mb-2 transition-colors group-hover:text-emerald-700">
+          <h3 className="text-lg font-black text-brand-navy leading-tight mb-2 transition-colors group-hover:text-brand-lime">
             {property.title}
           </h3>
 
@@ -69,7 +69,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
           <div className="mt-auto pt-4 border-t border-slate-50 flex items-center gap-4 text-xs font-medium text-slate-600">
             {property.bedrooms > 0 && <span>{property.bedrooms} Beds</span>}
             {property.bathrooms > 0 && <span>{property.bathrooms} Baths</span>}
-            <span className="ml-auto text-emerald-600 group-hover:underline">View Details →</span>
+            <span className="ml-auto text-brand-navy font-black text-xs uppercase tracking-tighter group-hover:text-brand-lime transition-colors">View Details →</span>
           </div>
         </div>
       </div>

@@ -32,12 +32,38 @@ export interface ChatMessage {
 
 export interface ApplicationState {
   step: number;
+  // Unit Selection
+  propertyId: string;
+  unitType: string;
+
+  // Personal Info
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
+  dateOfBirth: string;
+
+  // Residency History
+  currentAddress: string;
+  reasonForMoving: string;
+  currentLandlordName: string;
+  currentLandlordContact: string;
+
+  // Employment & Income
+  employmentStatus: string;
+  employerName: string;
+  jobTitle: string;
+  monthlyIncome: string;
+  proofOfIncomeType: string;
+
+  // Logistics
   moveInDate: string;
   occupants: string;
-  incomeSource: string;
+  occupantNames: string;
   petDetails: string;
+  vehicleInfo: string; // Make, Model, Plate
+
+  // Legal
+  consentToCreditCheck: boolean;
+  isSmoker: boolean;
 }

@@ -1,17 +1,43 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { PROPERTIES } from '../constants';
+import { PROPERTIES, LOGO_URL } from '../constants';
 import { Button } from '../components/Button';
 import { PropertyCard } from '../components/PropertyCard';
-import { Star, MapPin, Share, Heart, CheckCircle2, ShieldCheck, User, Wifi, Car, Utensils, Wind } from 'lucide-react';
+import { Star, MapPin, Share, Heart, CheckCircle2, ShieldCheck, User, Wifi, Car, Utensils, Wind, X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 
 export const PropertyDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const property = PROPERTIES.find(p => p.id === id);
 
+  const [selectedImageIndex, setSelectedImageIndex] = React.useState<number | null>(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
+  const handleOpenLightbox = (index: number) => {
+    setSelectedImageIndex(index);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const handleCloseLightbox = () => {
+    setSelectedImageIndex(null);
+    document.body.style.overflow = 'unset';
+  };
+
+  const showNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex((selectedImageIndex + 1) % property.images.length);
+    }
+  };
+
+  const showPrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex((selectedImageIndex - 1 + property.images.length) % property.images.length);
+    }
+  };
 
   if (!property) {
     return <div className="p-20 text-center text-xl font-bold">Property not found</div>;
@@ -21,11 +47,11 @@ export const PropertyDetail: React.FC = () => {
 
   const getIcon = (amenity: string) => {
     const lower = amenity.toLowerCase();
-    if (lower.includes('wifi')) return <Wifi size={20} className="text-emerald-700" />;
-    if (lower.includes('parking')) return <Car size={20} className="text-emerald-700" />;
-    if (lower.includes('kitchen') || lower.includes('dishwasher')) return <Utensils size={20} className="text-emerald-700" />;
-    if (lower.includes('air') || lower.includes('heat')) return <Wind size={20} className="text-emerald-700" />;
-    return <CheckCircle2 size={20} className="text-emerald-700" />;
+    if (lower.includes('wifi')) return <Wifi size={20} className="text-brand-navy" />;
+    if (lower.includes('parking')) return <Car size={20} className="text-brand-navy" />;
+    if (lower.includes('kitchen') || lower.includes('dishwasher')) return <Utensils size={20} className="text-brand-navy" />;
+    if (lower.includes('air') || lower.includes('heat')) return <Wind size={20} className="text-brand-navy" />;
+    return <CheckCircle2 size={20} className="text-brand-navy" />;
   };
 
   return (
@@ -37,7 +63,7 @@ export const PropertyDetail: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-[10px] font-black tracking-widest uppercase text-emerald-600 px-2 py-0.5 bg-emerald-50 rounded">
+                <span className="text-[10px] font-black tracking-widest uppercase text-brand-navy px-3 py-1 bg-brand-lime rounded-full">
                   {property.category}
                 </span>
                 <span className="text-slate-300">·</span>
@@ -57,41 +83,110 @@ export const PropertyDetail: React.FC = () => {
           </div>
         </div>
 
-        {/* Gallery Overhaul */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 aspect-[21/9] rounded-3xl overflow-hidden relative mb-16 shadow-2xl">
-          <div className="md:col-span-2 relative group overflow-hidden h-full">
+        {/* Premium Gallery Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 h-[500px] md:h-[600px] rounded-3xl overflow-hidden relative mb-16 shadow-2xl bg-slate-100">
+          {/* Main Large Image */}
+          <div
+            className="md:col-span-2 md:row-span-2 relative group cursor-pointer overflow-hidden border-2 border-transparent hover:border-brand-lime transition-all"
+            onClick={() => handleOpenLightbox(0)}
+          >
             <img
               src={property.images[0]}
               alt={property.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none"></div>
-          </div>
-          <div className="md:col-span-1 grid grid-rows-2 gap-4 h-full">
-            <div className="relative group overflow-hidden">
-              <img src={property.images[1]} alt="Detail 1" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none"></div>
-            </div>
-            <div className="relative group overflow-hidden">
-              <img src={property.images[2]} alt="Detail 2" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none"></div>
-            </div>
-          </div>
-          <div className="md:col-span-1 grid grid-rows-2 gap-4 h-full">
-            <div className="relative group overflow-hidden">
-              <img src={property.images[3]} alt="Detail 3" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none"></div>
-            </div>
-            <div className="relative group overflow-hidden">
-              <img src={property.images[4]} alt="Detail 4" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none"></div>
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+              <div className="bg-white/20 backdrop-blur-md p-4 rounded-full border border-white/30 text-white transform scale-90 group-hover:scale-100 transition-all duration-300">
+                <Maximize2 size={24} />
+              </div>
             </div>
           </div>
 
-          <button className="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md px-6 py-2.5 rounded-xl border border-white shadow-xl text-sm font-black uppercase tracking-widest text-slate-900 flex items-center gap-2 hover:bg-white transition-all">
+          {/* Side Grids */}
+          <div className="md:col-span-1 grid grid-rows-2 gap-3">
+            <div
+              className="relative group cursor-pointer overflow-hidden border-2 border-transparent hover:border-brand-lime transition-all"
+              onClick={() => handleOpenLightbox(1)}
+            >
+              <img src={property.images[1]} alt="Detail 1" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
+            </div>
+            <div
+              className="relative group cursor-pointer overflow-hidden border-2 border-transparent hover:border-brand-lime transition-all"
+              onClick={() => handleOpenLightbox(2)}
+            >
+              <img src={property.images[2]} alt="Detail 2" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
+            </div>
+          </div>
+
+          <div className="md:col-span-1 relative group cursor-pointer overflow-hidden border-2 border-transparent hover:border-brand-lime transition-all">
+            <div
+              className="w-full h-full"
+              onClick={() => handleOpenLightbox(3)}
+            >
+              <img
+                src={property.images[3]}
+                alt="Detail 3"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => handleOpenLightbox(0)}
+            className="absolute bottom-8 right-8 bg-white/90 backdrop-blur-md px-8 py-3 rounded-full border border-white shadow-2xl text-[11px] font-black uppercase tracking-[0.2em] text-brand-blue flex items-center gap-3 hover:bg-brand-lime hover:text-brand-navy hover:scale-105 transition-all duration-300"
+          >
+            <Maximize2 size={16} />
             View All Photos
           </button>
         </div>
+
+        {/* Immersive Lightbox Modal */}
+        {selectedImageIndex !== null && (
+          <div
+            className="fixed inset-0 z-[100] bg-brand-blue/98 flex items-center justify-center backdrop-blur-2xl transition-all duration-500"
+            onClick={handleCloseLightbox}
+          >
+            <button
+              className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors bg-white/10 p-3 rounded-full hover:bg-white/20"
+              onClick={handleCloseLightbox}
+            >
+              <X size={32} />
+            </button>
+
+            <button
+              className="absolute left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors bg-white/10 p-4 rounded-full hover:bg-white/20"
+              onClick={showPrev}
+            >
+              <ChevronLeft size={48} />
+            </button>
+
+            <button
+              className="absolute right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors bg-white/10 p-4 rounded-full hover:bg-white/20"
+              onClick={showNext}
+            >
+              <ChevronRight size={48} />
+            </button>
+
+            <div
+              className="max-w-6xl max-h-[85vh] px-12 relative flex flex-col items-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={property.images[selectedImageIndex]}
+                alt="Fullscreen view"
+                className="max-w-full max-h-full object-contain rounded-2xl shadow-[0_0_100px_rgba(0,0,0,0.5)] border border-white/10 animate-fade-in"
+              />
+              <div className="mt-8 text-white/60 font-black uppercase tracking-[0.3em] text-[10px] flex items-center gap-6">
+                <span className="text-brand-green">{selectedImageIndex + 1} / {property.images.length}</span>
+                <span className="w-12 h-[1px] bg-white/20"></span>
+                <span>{property.title}</span>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Content Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
@@ -106,14 +201,16 @@ export const PropertyDetail: React.FC = () => {
                 </p>
               </div>
               <div className="flex flex-col items-center">
-                <div className="h-14 w-14 bg-emerald-700 rounded-2xl flex items-center justify-center text-white text-xl font-black shadow-xl">E</div>
-                <span className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-tighter">ESDR OWNER</span>
+                <div className="h-16 w-16 flex items-center justify-center p-2">
+                  <img src={LOGO_URL} alt="ESDR" className="h-full w-full object-contain" />
+                </div>
+                <span className="text-[10px] font-black text-brand-navy mt-1 uppercase tracking-tighter">ESDR OWNER</span>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
               <div className="flex gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-100">
-                <ShieldCheck className="text-emerald-600 shrink-0" size={28} />
+                <ShieldCheck className="text-brand-lime shrink-0" size={32} />
                 <div>
                   <h3 className="font-bold text-slate-900">Direct from Landlord</h3>
                   <p className="text-sm text-slate-500 mt-1">We own every unit we list. No management middle-men or hidden fees.</p>
@@ -138,7 +235,7 @@ export const PropertyDetail: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {property.amenities.map((amenity, idx) => (
                   <div key={idx} className="flex items-center gap-4 text-slate-800 font-medium">
-                    <div className="p-3 bg-emerald-50 rounded-xl">
+                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
                       {getIcon(amenity)}
                     </div>
                     <span>{amenity}</span>
@@ -177,9 +274,9 @@ export const PropertyDetail: React.FC = () => {
                 </div>
               </div>
 
-              <Link to="/apply">
-                <Button fullWidth size="lg" className="py-6 rounded-2xl text-lg font-black bg-emerald-700 hover:bg-emerald-800 shadow-xl shadow-emerald-900/20">
-                  {property.priceUnit === 'night' ? 'Book Now' : 'Apply to Rent'}
+              <Link to={`/apply?propertyId=${property.id}`}>
+                <Button fullWidth size="lg" className="py-7 rounded-2xl text-xl font-black bg-brand-lime text-brand-navy hover:bg-[#D4E600] shadow-2xl shadow-brand-lime/20">
+                  {property.priceUnit === 'night' ? 'Book Now' : 'Apply Now'}
                 </Button>
               </Link>
 

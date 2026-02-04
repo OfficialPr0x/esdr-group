@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PropertyCard } from '../components/PropertyCard';
-import { PROPERTIES } from '../constants';
+import { PROPERTIES, LOGO_URL } from '../constants';
 import { PropertyCategory } from '../types';
 
 export const Properties: React.FC = () => {
@@ -16,10 +16,10 @@ export const Properties: React.FC = () => {
     <div className="bg-white min-h-screen pt-32 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-16">
-          <span className="text-xs font-black uppercase tracking-widest text-emerald-600 mb-4 block">Our Portfolio</span>
-          <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Available Space</h1>
+          <span className="text-sm font-black uppercase tracking-[0.2em] text-brand-lime mb-4 block underline underline-offset-8 decoration-2">Our Portfolio</span>
+          <h1 className="text-4xl md:text-6xl font-black text-brand-navy mb-6 tracking-tighter uppercase">Available Space</h1>
           <p className="text-xl text-slate-500 max-w-2xl leading-relaxed">
-            From modern family homes to secure commercial storage, discover how ESDR Group is redefining property management in Eastern Ontario.
+            From modern family homes to secure commercial storage, discover how ESDR Living is redefining property management in Eastern Ontario.
           </p>
         </div>
 
@@ -29,9 +29,9 @@ export const Properties: React.FC = () => {
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-8 py-3 rounded-2xl text-sm font-black tracking-widest uppercase transition-all whitespace-nowrap ${filter === cat
-                  ? 'bg-emerald-700 text-white shadow-xl shadow-emerald-900/20 translate-y-[-2px]'
-                  : 'bg-slate-50 text-slate-500 border border-slate-100 hover:bg-white hover:border-slate-300'
+              className={`px-10 py-4 rounded-2xl text-sm font-black tracking-widest uppercase transition-all whitespace-nowrap ${filter === cat
+                ? 'bg-brand-navy text-white shadow-2xl shadow-brand-navy/30 translate-y-[-4px] border-b-4 border-brand-lime'
+                : 'bg-slate-50 text-slate-400 border border-slate-100 hover:bg-white hover:text-brand-navy hover:shadow-lg transition-all duration-300'
                 }`}
             >
               {cat}

@@ -25,35 +25,69 @@ export const Home: React.FC = () => {
     <div className="flex flex-col min-h-screen bg-white">
 
       {/* Hero Section */}
-      <section className="relative h-[600px] flex items-center overflow-hidden">
+      <section className="relative h-screen flex items-center overflow-hidden">
+        {/* Background Layer */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80"
-            alt="Beautiful Home"
-            className="w-full h-full object-cover"
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2600&q=95"
+            alt="ESDR Living Premium Asset"
+            className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-[10s]"
           />
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px]"></div>
+          {/* Advanced Multi-layered Mask */}
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-blue via-brand-blue/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-blue via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-black/10"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
-          <div className="max-w-2xl">
-            <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
-              Homes, not just <span className="text-emerald-400">housing.</span>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+          <div className="max-w-4xl space-y-10">
+            <div className="inline-flex items-center space-x-3 bg-white/5 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full animate-fade-in-down">
+              <span className="h-2 w-2 rounded-full bg-brand-green animate-pulse"></span>
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/80">Eastern Ontario's Premier Portfolio</span>
+            </div>
+
+            <h1 className="text-7xl md:text-[140px] font-black tracking-[-0.04em] leading-[0.8] transition-all">
+              <span className="text-white">Homes,</span><br />
+              <span className="text-white/40">not just</span><br />
+              <span className="relative inline-block text-brand-green italic">
+                housing.
+                <span className="absolute -bottom-4 left-0 w-full h-4 bg-brand-green/20 blur-xl"></span>
+              </span>
             </h1>
-            <p className="text-xl text-slate-100 mb-8 leading-relaxed">
-              Find high-quality rental homes and commercial storage spaces across Eastern Ontario. Built on trust, family values, and local expertise.
+
+            <p className="text-xl md:text-2xl text-slate-300 max-w-xl font-light leading-relaxed border-l-2 border-brand-green/30 pl-8 ml-2">
+              Specializing in residential, multi-unit, and commercial storage. We build value through transparency and family-first property management.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" onClick={() => document.getElementById('listings')?.scrollIntoView({ behavior: 'smooth' })}>
-                View Available Listings
+
+            <div className="flex flex-wrap gap-8 pt-6">
+              <Button
+                onClick={() => document.getElementById('listings')?.scrollIntoView({ behavior: 'smooth' })}
+                className="group relative px-12 py-6 bg-brand-green text-white rounded-full overflow-hidden transition-all duration-500 hover:shadow-[0_20px_40px_rgba(126,141,109,0.3)] hover:-translate-y-1"
+                size="lg"
+              >
+                <span className="relative flex items-center space-x-3 text-sm font-black uppercase tracking-[0.2em]">
+                  <span>Explore Portfolio</span>
+                  <Search size={18} className="translate-y-[1px]" />
+                </span>
               </Button>
+
               <Link to="/about">
-                <Button size="lg" variant="ghost" className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/20 text-white">
-                  Our Values
+                <Button
+                  variant="ghost"
+                  className="px-12 py-6 bg-white/5 backdrop-blur-xl border border-white/10 text-white rounded-full hover:bg-white/10 hover:border-white/20 transition-all duration-500"
+                  size="lg"
+                >
+                  <span className="text-sm font-black uppercase tracking-[0.2em]">Our Values</span>
                 </Button>
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* Cinematic Scroll Indicator */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center space-y-4 opacity-50">
+          <span className="text-[10px] font-black text-white uppercase tracking-[0.4em] rotate-90 mb-8">Scroll</span>
+          <div className="h-16 w-[1px] bg-gradient-to-t from-brand-green to-transparent"></div>
         </div>
       </section>
 
@@ -73,9 +107,9 @@ export const Home: React.FC = () => {
               <button
                 key={idx}
                 onClick={() => setActiveCategory(cat.label)}
-                className={`flex flex-col items-center gap-2 min-w-[64px] cursor-pointer group transition-all pb-3 border-b-2 ${activeCategory === cat.label
-                  ? 'border-emerald-600 text-emerald-700 font-bold'
-                  : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-200'
+                className={`flex flex-col items-center gap-2 min-w-[64px] cursor-pointer group transition-all pb-3 border-b-4 ${activeCategory === cat.label
+                  ? 'border-brand-green text-brand-blue font-black'
+                  : 'border-transparent text-slate-400 hover:text-brand-blue hover:border-slate-200'
                   }`}
               >
                 <div className={`p-2 rounded-xl transition-colors ${activeCategory === cat.label ? 'bg-emerald-50' : 'group-hover:bg-slate-50'}`}>
@@ -110,30 +144,31 @@ export const Home: React.FC = () => {
         )}
       </main>
 
-      {/* Trust Banner Overhaul */}
-      <section className="bg-slate-900 text-white py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      {/* Trust Banner */}
+      <section className="bg-brand-blue text-white py-32 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-green to-transparent opacity-50"></div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
-              <div className="h-12 w-12 bg-emerald-500 rounded-2xl flex items-center justify-center mb-6">
-                <Building2 size={24} className="text-white" />
+              <div className="h-16 w-16 bg-white/5 border border-white/10 backdrop-blur-sm rounded-3xl flex items-center justify-center mb-8 shadow-2xl shadow-black/20">
+                <Building2 size={32} className="text-brand-green" />
               </div>
-              <h4 className="text-xl font-bold mb-3">Owner-Operated</h4>
-              <p className="text-slate-400 leading-relaxed">We aren't a management company—we are the owners. This means faster response times and better service for you.</p>
+              <h4 className="text-2xl font-black mb-4 uppercase tracking-tighter">Owner-Operated</h4>
+              <p className="text-slate-300 leading-relaxed text-lg">We aren't a management company—we are the owners. Faster response, better service, direct accountability.</p>
             </div>
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
-              <div className="h-12 w-12 bg-emerald-500 rounded-2xl flex items-center justify-center mb-6">
-                <Check size={24} className="text-white" />
+              <div className="h-16 w-16 bg-white/5 border border-white/10 backdrop-blur-sm rounded-3xl flex items-center justify-center mb-8 shadow-2xl shadow-black/20">
+                <Check size={32} className="text-brand-green" />
               </div>
-              <h4 className="text-xl font-bold mb-3">Zero Scam Policy</h4>
-              <p className="text-slate-400 leading-relaxed">Tired of phantom listings? Every property on our site is 100% verified and owned by ESDR Group. No deposits before showings.</p>
+              <h4 className="text-2xl font-black mb-4 uppercase tracking-tighter">Zero Scam Policy</h4>
+              <p className="text-slate-300 leading-relaxed text-lg">Every listing is 100% verified and owned by ESDR Living. We never ask for deposits before a showing.</p>
             </div>
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
-              <div className="h-12 w-12 bg-emerald-500 rounded-2xl flex items-center justify-center mb-6">
-                <Briefcase size={24} className="text-white" />
+              <div className="h-16 w-16 bg-white/5 border border-white/10 backdrop-blur-sm rounded-3xl flex items-center justify-center mb-8 shadow-2xl shadow-black/20">
+                <Briefcase size={32} className="text-brand-green" />
               </div>
-              <h4 className="text-xl font-bold mb-3">Professional Maintenance</h4>
-              <p className="text-slate-400 leading-relaxed">Our in-house team ensures properties are kept in top condition. We fix things right the first time.</p>
+              <h4 className="text-2xl font-black mb-4 uppercase tracking-tighter">Maintenance First</h4>
+              <p className="text-slate-300 leading-relaxed text-lg">Our in-house team maintains properties to the highest standards. We fix it right, the first time.</p>
             </div>
           </div>
         </div>
