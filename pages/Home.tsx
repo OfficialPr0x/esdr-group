@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Search, Building2, Briefcase, Warehouse, Home as HomeIcon, Check } from 'lucide-react';
 import { PropertyCard } from '../components/PropertyCard';
 import { Button } from '../components/Button';
-import { PROPERTIES } from '../constants';
+import { PROPERTIES, LOGO_URL } from '../constants';
 import { PropertyCategory } from '../types';
 
 export const Home: React.FC = () => {
@@ -88,6 +88,15 @@ export const Home: React.FC = () => {
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center space-y-4 opacity-50">
           <span className="text-[10px] font-black text-white uppercase tracking-[0.4em] rotate-90 mb-8">Scroll</span>
           <div className="h-16 w-[1px] bg-gradient-to-t from-brand-green to-transparent"></div>
+        </div>
+
+        {/* Hero Branding Logo - Strategic Primary Position */}
+        {/* Hero Branding Logo - Strategic Primary Position */}
+        <div className="absolute bottom-8 left-[55%] md:left-[52%] z-20 flex flex-col items-start animate-fade-in delay-700">
+          <div className="relative group">
+            <div className="absolute inset-0 bg-brand-green/10 blur-3xl rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-1000"></div>
+            <img src={LOGO_URL} alt="ESDR Group" className="h-24 md:h-48 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-all duration-1000 filter drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]" />
+          </div>
         </div>
       </section>
 

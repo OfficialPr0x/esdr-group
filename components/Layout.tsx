@@ -112,70 +112,72 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         {children}
       </main>
 
-      {/* Footer */}
-      <footer className="bg-slate-950 text-slate-400 pt-20 pb-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-slate-900">
-            <div className="md:col-span-5">
-              <div className="flex items-center mb-8">
-                <div className="h-20 w-48 flex items-center">
-                  <img src={LOGO_URL} alt={COMPANY_NAME} className="h-full w-full object-contain brightness-0 invert" />
+      {/* Footer - Hidden on immersive intake routes */}
+      {location.pathname !== '/apply' && (
+        <footer className="bg-slate-950 text-slate-400 pt-20 pb-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-slate-900">
+              <div className="md:col-span-5">
+                <div className="flex items-center mb-8">
+                  <div className="h-20 w-48 flex items-center">
+                    <img src={LOGO_URL} alt={COMPANY_NAME} className="h-full w-full object-contain brightness-0 invert" />
+                  </div>
+                </div>
+                <p className="max-w-sm text-slate-500 text-sm leading-relaxed mb-8">
+                  The premier real estate investment group in Eastern Ontario. We own and operate residential and commercial properties with a focus on trust, quality, and community building through ESDR Living.
+                </p>
+                <div className="flex space-x-4">
+                  {/* Social icons could go here */}
+                  <div className="h-10 w-10 rounded-full border border-slate-800 flex items-center justify-center hover:bg-emerald-600 hover:border-emerald-600 transition-colors cursor-pointer group">
+                    <Mail size={18} className="group-hover:text-white" />
+                  </div>
+                  <div className="h-10 w-10 rounded-full border border-slate-800 flex items-center justify-center hover:bg-emerald-600 hover:border-emerald-600 transition-colors cursor-pointer group">
+                    <Building2 size={18} className="group-hover:text-white" />
+                  </div>
                 </div>
               </div>
-              <p className="max-w-sm text-slate-500 text-sm leading-relaxed mb-8">
-                The premier real estate investment group in Eastern Ontario. We own and operate residential and commercial properties with a focus on trust, quality, and community building through ESDR Living.
-              </p>
-              <div className="flex space-x-4">
-                {/* Social icons could go here */}
-                <div className="h-10 w-10 rounded-full border border-slate-800 flex items-center justify-center hover:bg-emerald-600 hover:border-emerald-600 transition-colors cursor-pointer group">
-                  <Mail size={18} className="group-hover:text-white" />
-                </div>
-                <div className="h-10 w-10 rounded-full border border-slate-800 flex items-center justify-center hover:bg-emerald-600 hover:border-emerald-600 transition-colors cursor-pointer group">
-                  <Building2 size={18} className="group-hover:text-white" />
-                </div>
+
+              <div className="md:col-span-2">
+                <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-widest">Company</h4>
+                <ul className="space-y-4 text-sm">
+                  <li><Link to="/about" className="hover:text-emerald-500 transition-colors">Our Story</Link></li>
+                  <li><Link to="/contact" className="hover:text-emerald-500 transition-colors">Careers</Link></li>
+                  <li><Link to="/contact" className="hover:text-emerald-500 transition-colors">Portfolio</Link></li>
+                </ul>
+              </div>
+
+              <div className="md:col-span-2">
+                <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-widest">Rentals</h4>
+                <ul className="space-y-4 text-sm">
+                  <li><Link to="/properties" className="hover:text-emerald-500 transition-colors">Residential</Link></li>
+                  <li><Link to="/properties" className="hover:text-emerald-500 transition-colors">Multi-Unit</Link></li>
+                  <li><Link to="/apply" className="hover:text-emerald-500 transition-colors">Tenant App</Link></li>
+                </ul>
+              </div>
+
+              <div className="md:col-span-3">
+                <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-widest">Contact</h4>
+                <ul className="space-y-4 text-sm">
+                  <li className="flex items-start">
+                    <span className="text-white font-medium mr-2">Email:</span>
+                    <a href="mailto:rentals@esdrgroup.ca" className="hover:text-white">rentals@esdrgroup.ca</a>
+                  </li>
+                  <li>Eastern Ontario, Canada</li>
+                  <li>Mon-Fri: 9am - 5pm</li>
+                </ul>
               </div>
             </div>
 
-            <div className="md:col-span-2">
-              <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-widest">Company</h4>
-              <ul className="space-y-4 text-sm">
-                <li><Link to="/about" className="hover:text-emerald-500 transition-colors">Our Story</Link></li>
-                <li><Link to="/contact" className="hover:text-emerald-500 transition-colors">Careers</Link></li>
-                <li><Link to="/contact" className="hover:text-emerald-500 transition-colors">Portfolio</Link></li>
-              </ul>
-            </div>
-
-            <div className="md:col-span-2">
-              <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-widest">Rentals</h4>
-              <ul className="space-y-4 text-sm">
-                <li><Link to="/properties" className="hover:text-emerald-500 transition-colors">Residential</Link></li>
-                <li><Link to="/properties" className="hover:text-emerald-500 transition-colors">Multi-Unit</Link></li>
-                <li><Link to="/apply" className="hover:text-emerald-500 transition-colors">Tenant App</Link></li>
-              </ul>
-            </div>
-
-            <div className="md:col-span-3">
-              <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-widest">Contact</h4>
-              <ul className="space-y-4 text-sm">
-                <li className="flex items-start">
-                  <span className="text-white font-medium mr-2">Email:</span>
-                  <a href="mailto:rentals@esdrgroup.ca" className="hover:text-white">rentals@esdrgroup.ca</a>
-                </li>
-                <li>Eastern Ontario, Canada</li>
-                <li>Mon-Fri: 9am - 5pm</li>
-              </ul>
+            <div className="pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] font-bold uppercase tracking-widest text-slate-600">
+              <p>&copy; {new Date().getFullYear()} ESDR LIVING. ALL RIGHTS RESERVED.</p>
+              <div className="flex gap-8">
+                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+              </div>
             </div>
           </div>
-
-          <div className="pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] font-bold uppercase tracking-widest text-slate-600">
-            <p>&copy; {new Date().getFullYear()} ESDR LIVING. ALL RIGHTS RESERVED.</p>
-            <div className="flex gap-8">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+        </footer>
+      )}
 
       {/* AI Chat Widget */}
       <ChatWidget />

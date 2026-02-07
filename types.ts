@@ -58,6 +58,7 @@ export interface ApplicationState {
 
   // Logistics
   moveInDate: string;
+  requestedLeaseTerm: string;
   occupants: string;
   occupantNames: string;
   petDetails: string;
@@ -66,4 +67,5 @@ export interface ApplicationState {
   // Legal
   consentToCreditCheck: boolean;
   isSmoker: boolean;
+  currentMonthlyRent: string;
 }
